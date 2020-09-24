@@ -10,19 +10,29 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams
+
 } from "react-router-dom";
-import Product from './components/Product/Product';
 import ProductDetail from './components/ProductDetail/ProductDetail';
+import Inventory from './Inventory/Inventory';
+import Login from './components/Login/Login';
+import { createContext } from 'react';
+import { useState } from 'react';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Shipment from './components/Shipment/Shipment';
+
+export const UserContext = createContext();
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
+
   return (
-    <div>
-      <Header></Header>
+    <UserContext.Provider value = {[loggedInUser,  setLoggedInUser]}>
+      
+      
       <Router>
+          <Header></Header>
             <Switch>
+             
               <Route path="/shop">
               <Shop></Shop>
               </Route>
@@ -35,6 +45,15 @@ function App() {
               <Route exact path="/">
               <Shop></Shop>
               </Route>
+              <PrivateRoute path="/inventory">
+                <Inventory></Inventory>
+              </PrivateRoute>
+              <Route path="/login">
+                <Login></Login>
+              </Route>
+              <PrivateRoute  path="/shipment">
+                <Shipment></Shipment>
+              </PrivateRoute >
               <Route path="/product/:productkey">
                 <ProductDetail></ProductDetail>
               </Route>
@@ -46,7 +65,7 @@ function App() {
 
         
     
-    </div>
+    </UserContext.Provider>
   );
 }
 
