@@ -13,12 +13,12 @@ import {
 
 } from "react-router-dom";
 import ProductDetail from './components/ProductDetail/ProductDetail';
-import Inventory from './Inventory/Inventory';
 import Login from './components/Login/Login';
 import { createContext } from 'react';
 import { useState } from 'react';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Shipment from './components/Shipment/Shipment';
+import Inventory from './components/Inventory/Inventory';
 
 export const UserContext = createContext();
 
